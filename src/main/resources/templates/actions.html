@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Динамический заголовок страницы -->
+    <title th:text="${contact.id != null} ? 'Edit contact' : 'Create contact'">Contact Form</title>
+</head>
+<body>
+<!-- Динамический заголовок формы -->
+<h1 th:text="${contact.id != null} ? 'Edit contact' : 'Create contact'">Contact Form</h1>
+
+<!-- Форма с динамическим действием -->
+<form th:action="${contact.id != null} ? @{/contact/edit} : @{/contact/create}"
+      method="post"
+      th:object="${contact}">
+
+    <!-- Скрытое поле ID (только для редактирования) -->
+    <input type="hidden" name="id" th:field="*{id}" th:if="${contact.id != null}">
+
+    <div>
+        <label for="firstName">First Name:</label>
+        <!-- Поле имени с привязкой к данным -->
+        <input type="text" id="firstName" name="firstName"
+               required th:field="*{firstName}">
+    </div>
+
+    <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName"
+               required th:field="*{lastName}">
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"
+               required th:field="*{email}">
+    </div>
+
+    <div>
+        <label for="phone">Phone:</label>
+        <input type="number" id="phone" name="phone"
+               required th:field="*{phone}">
+    </div>
+
+    <!-- Кнопка с динамическим текстом -->
+    <button type="submit" th:text="${contact.id != null} ? 'Update' : 'Save'">
+        Submit
+    </button>
+</form>
+</body>
+</html>
