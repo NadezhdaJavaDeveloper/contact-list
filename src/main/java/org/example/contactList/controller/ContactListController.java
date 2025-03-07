@@ -23,41 +23,39 @@ public class ContactListController {
         return "index";
     }
 
-    //нужен для отображнения формы, с помощью к-ой будем создавать задачу
     @GetMapping("/contact/create")
     public String showCreateForm(Model model) {
         model.addAttribute("contact", new Contact());
         return "actions";
     }
 
-
     @PostMapping("/contact/create")
-    public String createTask(@ModelAttribute Contact contact) { //@ModelAttribute эти параметры будут автоматически заполняться моделью, которая получила данные из представления
+    public String createTask(@ModelAttribute Contact contact) {
         contactListService.save(contact);
-        return "redirect:/"; //это строка перебрасывает на @GetMapping("/")
+        return "redirect:/";
     }
 
     @GetMapping("/contact/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) { //читает значение указанное в пути
+    public String showEditForm(@PathVariable Long id, Model model) {
         Contact contact = contactListService.findById(id);
         if (contact != null) {
             model.addAttribute("contact", contact);
             return "actions";
         }
-        return "redirect:/"; //это строка перебрасывает на @GetMapping("/")
+        return "redirect:/";
     }
 
     @PostMapping("/contact/edit")
     public String editContact(@ModelAttribute Contact contact) {
         contactListService.update(contact);
-        return "redirect:/"; //это строка перебрасывает на @GetMapping("/")
+        return "redirect:/";
     }
 
 
     @GetMapping("/contact/delete/{id}")
     public String deleteContact(@PathVariable Long id) {
         contactListService.deleteById(id);
-        return "redirect:/"; //это строка перебрасывает на @GetMapping("/")
+        return "redirect:/";
     }
 
 }

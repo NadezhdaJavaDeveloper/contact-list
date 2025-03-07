@@ -23,16 +23,15 @@ public class ContactRepositoryImpl implements ContactRepository {
     public List<Contact> findAll() {
         String sql = "SELECT * FROM contact_list.contacts";
         return jdbcTemplate.query(sql, new ContactRowMapper());
-        //new ContactRowMapper() создает контакт из вычитанных из БД полей
     }
 
     @Override
     public Optional<Contact> findById(Long id) {
         String sql = "SELECT * FROM contact_list.contacts WHERE id=?";
-        Contact contact = DataAccessUtils.singleResult( //.query возвратит списко, но нам нужен только один результат
+        Contact contact = DataAccessUtils.singleResult(
                 jdbcTemplate.query(sql, //запрос
-                        new ArgumentPreparedStatementSetter(new Object[]{id}), //агрументы для запроса
-                        new RowMapperResultSetExtractor<>(new ContactRowMapper(), 1) //мэппер
+                        new ArgumentPreparedStatementSetter(new Object[]{id}),
+                        new RowMapperResultSetExtractor<>(new ContactRowMapper(), 1)
                 )
         );
         return Optional.ofNullable(contact);

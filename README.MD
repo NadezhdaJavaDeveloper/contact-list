@@ -24,7 +24,7 @@
 1) убедитесь, что на вашем ПК установлены IntelliJ IDEA и Docker Desktop;
 2) клонируйте код приложения из репозитория командой:
 ```
-git clone <https://github.com/NadezhdaJavaDeveloper/contactList.git>
+git clone <https://github.com/NadezhdaJavaDeveloper/contact-list.git>
 ```
 3) откройте проект с помощью IntelliJ IDEA;
 4) откройте терминал;
